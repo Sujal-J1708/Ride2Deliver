@@ -190,11 +190,16 @@ target="_blank">
 
 async function getCoordinates(place){
 
-let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0=&start=8.681495,49.41461&end=8.687872,49.420318';
+let url=`https://nominatim.openstreetmap.org/search?format=json&q=${place}`;
 
 let response=await fetch(url);
 
 let data=await response.json();
+
+if(data.length==0){
+alert("Location not found. Please enter a valid address.");
+return null;
+}
 
 return{
 lat:data[0].lat,
@@ -202,6 +207,7 @@ lon:data[0].lon
 };
 
 }
+
 
 function calculatePrice(distance){
 
@@ -217,15 +223,25 @@ return Math.round(price);
 
 }
 
+
 async function calculateDistance(){
+
+try{
 
 let pickup=document.getElementById("pickup").value;
 let drop=document.getElementById("drop").value;
 
+if(!pickup || !drop){
+alert("Please enter both pickup and delivery location");
+return;
+}
+
 let p1=await getCoordinates(pickup);
 let p2=await getCoordinates(drop);
 
-let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=YOUR_OPENROUTESERVICE_API_KEY&start=${p1.lon},${p1.lat}&end=${p2.lon},${p2.lat}`;
+if(!p1 || !p2) return;
+
+let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=https://api.openrouteservice.org/v2/directions/driving-car?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0=&start=8.681495,49.41461&end=8.687872,49.420318&start=${p1.lon},${p1.lat}&end=${p2.lon},${p2.lat}`;
 
 let res=await fetch(url);
 
@@ -242,6 +258,14 @@ document.getElementById("price").innerText="₹"+price;
 document.getElementById("distanceField").value=distance.toFixed(1)+" km";
 
 document.getElementById("priceField").value="₹"+price;
+
+}catch(error){
+
+alert("Unable to calculate distance. Please try again.");
+
+console.log(error);
+
+}
 
 }
 
