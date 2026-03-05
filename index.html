@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ride2Deliver | Navi Mumbai Delivery</title>
+
+<title>Ride2Deliver | Navi Mumbai Delivery Service</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Google Maps -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7gXMBwOrWhYUTW-vioo58GO6qaHOqQOg&libraries=places"></script>
 
 </head>
 
 <body class="bg-gray-100 text-gray-900">
 
+<!-- HEADER -->
+
 <header class="bg-black text-white">
-<div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-<h1 class="text-2xl font-bold text-red-500">Ride2Deliver</h1>
-<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">Book Delivery</a>
+
+<div class="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
+
+<div class="flex items-center gap-3">
+
+<img src="logo.png" class="h-12">
+
+<h1 class="text-2xl font-bold text-red-500">
+Ride2Deliver
+</h1>
+
 </div>
+
+<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">
+Book Delivery
+</a>
+
+</div>
+
 </header>
 
+
+<!-- HERO -->
 
 <section class="bg-gradient-to-r from-black to-red-900 text-white text-center py-24">
 
 <h1 class="text-4xl font-bold mb-4">
-Fast & Reliable Delivery Across Navi Mumbai
+Fast Local Delivery Across Navi Mumbai
 </h1>
 
 <p class="text-xl mb-4">
@@ -33,11 +52,98 @@ Medicines • Documents • Small Parcels
 </p>
 
 <p class="max-w-3xl mx-auto text-gray-300">
-Ride2Deliver provides fast and secure local delivery for medicines, documents and small parcels anywhere across Navi Mumbai.
+Ride2Deliver is a trusted local delivery service in Navi Mumbai specializing in the safe and timely delivery of medicines, important documents, and small parcels. We focus on speed, reliability, and customer satisfaction to ensure every delivery reaches safely and on time.
 </p>
 
 </section>
 
+
+<!-- SERVICES -->
+
+<section class="max-w-6xl mx-auto py-20 px-6 text-center">
+
+<h2 class="text-3xl font-semibold mb-10">
+Our Services
+</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-white shadow p-6 rounded-lg">
+<h3 class="text-xl font-semibold">Medicine Delivery</h3>
+<p class="text-gray-600 mt-2">
+Fast medicine pickup and delivery across Navi Mumbai.
+</p>
+</div>
+
+<div class="bg-white shadow p-6 rounded-lg">
+<h3 class="text-xl font-semibold">Document Delivery</h3>
+<p class="text-gray-600 mt-2">
+Secure transport of important documents.
+</p>
+</div>
+
+<div class="bg-white shadow p-6 rounded-lg">
+<h3 class="text-xl font-semibold">Small Parcel Delivery</h3>
+<p class="text-gray-600 mt-2">
+Quick pickup and drop service for parcels.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PRICE LIST -->
+
+<section class="max-w-4xl mx-auto px-6 py-10 text-center">
+
+<h2 class="text-3xl font-semibold mb-6">
+Delivery Price List
+</h2>
+
+<div class="bg-white shadow rounded-lg p-6">
+
+<table class="w-full text-left">
+
+<tr class="border-b">
+<th class="py-2">Distance</th>
+<th class="py-2">Price</th>
+</tr>
+
+<tr class="border-b">
+<td class="py-2">1 – 3 km</td>
+<td class="py-2">₹70</td>
+</tr>
+
+<tr class="border-b">
+<td class="py-2">3 – 5 km</td>
+<td class="py-2">₹90</td>
+</tr>
+
+<tr class="border-b">
+<td class="py-2">5 – 8 km</td>
+<td class="py-2">₹120</td>
+</tr>
+
+<tr class="border-b">
+<td class="py-2">8 – 10 km</td>
+<td class="py-2">₹140</td>
+</tr>
+
+<tr>
+<td class="py-2">Above 10 km</td>
+<td class="py-2">₹140 + ₹10 per km</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+<!-- BOOKING -->
 
 <section id="booking" class="max-w-3xl mx-auto px-6 py-20">
 
@@ -45,43 +151,38 @@ Ride2Deliver provides fast and secure local delivery for medicines, documents an
 Book Your Delivery
 </h2>
 
+<p class="text-center text-gray-600 mb-10">
+Enter pickup and delivery address and we will confirm your booking.
+</p>
+
 <form action="https://formspree.io/f/xkovdwed" method="POST"
 class="bg-white shadow-lg rounded-xl p-8 space-y-5">
 
 <input type="text" name="Customer Name" placeholder="Your Name"
 class="w-full border p-3 rounded" required>
 
-<input type="tel" name="Phone" placeholder="Contact Number"
+<input type="tel" name="Phone Number" placeholder="Phone Number"
 class="w-full border p-3 rounded" required>
 
-<input id="pickup" name="Pickup Location"
+<input type="text" name="Pickup Address"
 placeholder="Pickup Address"
 class="w-full border p-3 rounded" required>
 
-<input id="drop" name="Delivery Location"
+<input type="text" name="Delivery Address"
 placeholder="Delivery Address"
 class="w-full border p-3 rounded" required>
 
-<input type="hidden" id="distanceField" name="Estimated Distance">
-<input type="hidden" id="priceField" name="Delivery Charge">
+<textarea name="Parcel Details"
+placeholder="Parcel / Medicine / Document details"
+class="w-full border p-3 rounded"></textarea>
+
+<!-- ORDER ID -->
+
 <input type="hidden" id="orderId" name="Order ID">
 
-<div class="bg-gray-100 p-4 rounded-lg">
-
-<p class="text-lg">
-Estimated Distance: <span id="distance">0 km</span>
-</p>
-
-<p class="text-xl font-semibold text-red-600">
-Delivery Charge: <span id="price">₹0</span>
-</p>
-
-</div>
-
-<button id="submitBtn"
-type="submit"
-class="w-full bg-red-600 text-white py-3 rounded hover:bg-red-700"
-onclick="generateOrderId();disableButton()">
+<button type="submit"
+onclick="generateOrderId()"
+class="w-full bg-red-600 text-white py-3 rounded hover:bg-red-700">
 Confirm Booking
 </button>
 
@@ -90,103 +191,47 @@ Confirm Booking
 </section>
 
 
+<!-- FOOTER -->
+
 <footer class="bg-black text-gray-300 text-center py-10">
-<p>📞 88501 88435</p>
-<p>📧 ride2deliver@outlook.com</p>
-<p class="text-sm mt-3">© 2026 Ride2Deliver</p>
+
+<p class="text-lg">
+📞 88501 88435
+</p>
+
+<p>
+📧 ride2deliver@outlook.com
+</p>
+
+<p class="text-sm mt-3">
+© 2026 Ride2Deliver. All Rights Reserved.
+</p>
+
 </footer>
 
 
+<!-- WHATSAPP BUTTON -->
+
 <a href="https://wa.me/918850188435"
-class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg"
-target="_blank">💬</a>
+class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600"
+target="_blank">
+
+💬
+
+</a>
 
 
 <script>
 
-let pickupAutocomplete;
-let dropAutocomplete;
-
-function initAutocomplete(){
-
-pickupAutocomplete = new google.maps.places.Autocomplete(
-document.getElementById("pickup")
-);
-
-dropAutocomplete = new google.maps.places.Autocomplete(
-document.getElementById("drop")
-);
-
-pickupAutocomplete.addListener("place_changed",calculateDistance);
-dropAutocomplete.addListener("place_changed",calculateDistance);
-
-}
-
-function calculatePrice(distance){
-
-let price=0;
-
-if(distance<=3) price=70
-else if(distance<=5) price=90
-else if(distance<=8) price=120
-else if(distance<=10) price=140
-else price=140 + (distance-10)*10
-
-return Math.round(price);
-
-}
-
-function calculateDistance(){
-
-let service = new google.maps.DistanceMatrixService();
-
-service.getDistanceMatrix({
-
-origins:[document.getElementById("pickup").value],
-destinations:[document.getElementById("drop").value],
-travelMode:"DRIVING"
-
-}, function(response,status){
-
-if(status!=="OK") return;
-
-let distanceMeters=response.rows[0].elements[0].distance.value;
-
-let distance=distanceMeters/1000;
-
-let price=calculatePrice(distance);
-
-document.getElementById("distance").innerText=distance.toFixed(1)+" km";
-
-document.getElementById("price").innerText="₹"+price;
-
-document.getElementById("distanceField").value=distance.toFixed(1)+" km";
-
-document.getElementById("priceField").value="₹"+price;
-
-});
-
-}
-
 function generateOrderId(){
 
-let random=Math.floor(1000+Math.random()*9000);
+let randomNumber = Math.floor(1000 + Math.random() * 9000)
 
-document.getElementById("orderId").value="R2D-"+random;
+let orderNumber = "R2D-" + randomNumber
 
-}
-
-function disableButton(){
-
-let btn=document.getElementById("submitBtn");
-
-btn.disabled=true;
-
-btn.innerText="Booking Sent";
+document.getElementById("orderId").value = orderNumber
 
 }
-
-window.onload=initAutocomplete;
 
 </script>
 
