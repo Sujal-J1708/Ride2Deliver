@@ -150,9 +150,151 @@ Confirm Booking
 </form>
 
 </section>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ride2Deliver | Navi Mumbai Delivery Service</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body class="bg-gray-100 text-gray-900">
 
 
-<!-- FOOTER -->
+<header class="bg-black text-white">
+
+<div class="max-w-6xl mx-auto flex justify-between items-center px-4 py-4">
+
+<h1 class="text-xl font-bold text-red-500">
+Ride2Deliver
+</h1>
+
+<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">
+Book Delivery
+</a>
+
+</div>
+
+</header>
+
+
+<section class="bg-gradient-to-r from-black to-red-900 text-white">
+
+<div class="max-w-6xl mx-auto px-4 py-24 text-center">
+
+<h1 class="text-4xl font-bold mb-4">
+Fast & Reliable Delivery Across Navi Mumbai
+</h1>
+
+<p class="text-xl text-gray-200 mb-6">
+Your trusted partner for medicines, documents & small parcels.
+</p>
+
+<p class="max-w-3xl mx-auto text-gray-300">
+Ride2Deliver is a trusted local delivery service in Navi Mumbai, specializing in the safe and timely delivery of medicines, important documents, and small parcels. We focus on speed, reliability, and customer satisfaction, ensuring every delivery reaches its destination securely and on time.
+</p>
+
+</div>
+
+</section>
+
+
+<section class="max-w-6xl mx-auto px-4 py-20 text-center">
+
+<h2 class="text-3xl font-semibold mb-10">
+Our Services
+</h2>
+
+<div class="grid md:grid-cols-3 gap-8">
+
+<div class="bg-white p-6 rounded-lg shadow">
+<h3 class="text-xl font-semibold">Medicine Delivery</h3>
+<p class="text-gray-600 mt-2">
+Fast pickup and delivery of medicines across Navi Mumbai.
+</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow">
+<h3 class="text-xl font-semibold">Document Delivery</h3>
+<p class="text-gray-600 mt-2">
+Secure transport of important documents and paperwork.
+</p>
+</div>
+
+<div class="bg-white p-6 rounded-lg shadow">
+<h3 class="text-xl font-semibold">Small Parcel Delivery</h3>
+<p class="text-gray-600 mt-2">
+Quick delivery for small packages and items.
+</p>
+</div>
+
+</div>
+
+</section>
+
+
+<section id="booking" class="max-w-3xl mx-auto px-4 py-20">
+
+<h2 class="text-3xl font-semibold text-center mb-2">
+Book Your Delivery
+</h2>
+
+<p class="text-center text-gray-600 mb-10">
+Enter your pickup and delivery location to instantly calculate the delivery charge and book your Ride2Deliver service.
+</p>
+
+<form action="https://formspree.io/f/xkovdwed" method="POST" class="bg-white shadow-lg rounded-xl p-8 space-y-5">
+
+<input type="text" name="Customer Name" placeholder="Your Name"
+class="w-full border p-3 rounded" required>
+
+<input type="tel" name="Phone" placeholder="Contact Number"
+class="w-full border p-3 rounded" required>
+
+<input id="pickup" name="Pickup Location"
+placeholder="Pickup Location"
+class="w-full border p-3 rounded" required>
+
+<input id="drop" name="Delivery Location"
+placeholder="Delivery Location"
+class="w-full border p-3 rounded" required>
+
+<input type="hidden" id="distanceField" name="Estimated Distance">
+<input type="hidden" id="priceField" name="Delivery Charge">
+
+<div class="bg-gray-100 p-4 rounded-lg">
+
+<p class="text-lg">
+Estimated Distance:
+<span id="distance">0 km</span>
+</p>
+
+<p class="text-xl font-semibold text-red-600">
+Delivery Charge:
+<span id="price">₹0</span>
+</p>
+
+<p class="text-sm text-gray-500 mt-2">
+Final price may vary slightly depending on traffic conditions or route changes.
+</p>
+
+</div>
+
+<button type="submit"
+class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700">
+Confirm Booking
+</button>
+
+</form>
+
+</section>
+
 
 <footer class="bg-black text-gray-300 text-center py-10">
 
@@ -171,8 +313,6 @@ Confirm Booking
 </footer>
 
 
-<!-- WHATSAPP BUTTON -->
-
 <a href="https://wa.me/918850188435"
 class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600"
 target="_blank">
@@ -186,7 +326,7 @@ target="_blank">
 
 <script>
 
-const API_KEY="https://api.openrouteservice.org/v2/directions/driving-car?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0=&start=8.681495,49.41461&end=8.687872,49.420318"
+const API_KEY="eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0="
 
 async function getCoordinates(place){
 
@@ -205,7 +345,6 @@ lon:data[0].lon
 
 }
 
-
 function calculatePrice(distance){
 
 let price=0
@@ -220,7 +359,6 @@ return Math.round(price)
 
 }
 
-
 async function updatePrice(){
 
 let pickup=document.getElementById("pickup").value
@@ -233,7 +371,7 @@ let p2=await getCoordinates(drop)
 
 if(!p1 || !p2) return
 
-let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0=&start=8.681495,49.41461&end=8.687872,49.420318}&start=${p1.lon},${p1.lat}&end=${p2.lon},${p2.lat}`
+let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${p1.lon},${p1.lat}&end=${p2.lon},${p2.lat}`
 
 let res=await fetch(url)
 
