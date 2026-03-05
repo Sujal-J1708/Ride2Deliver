@@ -1,40 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Ride2Deliver | Navi Mumbai Delivery Service</title>
+<title>Ride2Deliver | Navi Mumbai Delivery</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Maps -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7gXMBwOrWhYUTW-vioo58GO6qaHOqQOg&libraries=places"></script>
 
 </head>
 
 <body class="bg-gray-100 text-gray-900">
 
-<!-- HEADER -->
-
 <header class="bg-black text-white">
-
 <div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-
-<h1 class="text-2xl font-bold text-red-500">
-Ride2Deliver
-</h1>
-
-<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">
-Book Delivery
-</a>
-
+<h1 class="text-2xl font-bold text-red-500">Ride2Deliver</h1>
+<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">Book Delivery</a>
 </div>
-
 </header>
 
-
-
-<!-- HERO -->
 
 <section class="bg-gradient-to-r from-black to-red-900 text-white text-center py-24">
 
@@ -47,53 +33,17 @@ Medicines • Documents • Small Parcels
 </p>
 
 <p class="max-w-3xl mx-auto text-gray-300">
-Ride2Deliver is a trusted local delivery service in Navi Mumbai specializing in safe and timely delivery of medicines, important documents, and small parcels. We focus on speed, reliability, and customer satisfaction.
+Ride2Deliver provides fast and secure local delivery for medicines, documents and small parcels anywhere across Navi Mumbai.
 </p>
 
 </section>
 
-
-
-<!-- SERVICES -->
-
-<section class="max-w-6xl mx-auto py-20 px-6 text-center">
-
-<h2 class="text-3xl font-semibold mb-10">Our Services</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="bg-white shadow p-6 rounded-lg">
-<h3 class="text-xl font-semibold">Medicine Delivery</h3>
-<p class="text-gray-600 mt-2">Fast medicine delivery anywhere in Navi Mumbai.</p>
-</div>
-
-<div class="bg-white shadow p-6 rounded-lg">
-<h3 class="text-xl font-semibold">Document Delivery</h3>
-<p class="text-gray-600 mt-2">Secure delivery of important documents.</p>
-</div>
-
-<div class="bg-white shadow p-6 rounded-lg">
-<h3 class="text-xl font-semibold">Parcel Delivery</h3>
-<p class="text-gray-600 mt-2">Small parcel pickup and drop service.</p>
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- BOOKING -->
 
 <section id="booking" class="max-w-3xl mx-auto px-6 py-20">
 
 <h2 class="text-3xl font-semibold text-center mb-4">
 Book Your Delivery
 </h2>
-
-<p class="text-center text-gray-600 mb-10">
-Enter pickup and delivery locations to calculate the delivery charge instantly.
-</p>
 
 <form action="https://formspree.io/f/xkovdwed" method="POST"
 class="bg-white shadow-lg rounded-xl p-8 space-y-5">
@@ -105,43 +55,34 @@ class="w-full border p-3 rounded" required>
 class="w-full border p-3 rounded" required>
 
 <input id="pickup" name="Pickup Location"
-placeholder="Pickup Location"
+placeholder="Pickup Address"
 class="w-full border p-3 rounded" required>
 
 <input id="drop" name="Delivery Location"
-placeholder="Delivery Location"
+placeholder="Delivery Address"
 class="w-full border p-3 rounded" required>
-
-
-<!-- Hidden Fields -->
 
 <input type="hidden" id="distanceField" name="Estimated Distance">
 <input type="hidden" id="priceField" name="Delivery Charge">
 <input type="hidden" id="orderId" name="Order ID">
 
-
 <div class="bg-gray-100 p-4 rounded-lg">
 
 <p class="text-lg">
-Estimated Distance:
-<span id="distance">0 km</span>
+Estimated Distance: <span id="distance">0 km</span>
 </p>
 
 <p class="text-xl font-semibold text-red-600">
-Delivery Charge:
-<span id="price">₹0</span>
+Delivery Charge: <span id="price">₹0</span>
 </p>
 
 </div>
 
-
 <button id="submitBtn"
 type="submit"
 class="w-full bg-red-600 text-white py-3 rounded hover:bg-red-700"
-onclick="generateOrderId(); disableButton()">
-
+onclick="generateOrderId();disableButton()">
 Confirm Booking
-
 </button>
 
 </form>
@@ -149,150 +90,105 @@ Confirm Booking
 </section>
 
 
-
-<!-- FOOTER -->
-
 <footer class="bg-black text-gray-300 text-center py-10">
-
 <p>📞 88501 88435</p>
 <p>📧 ride2deliver@outlook.com</p>
-
-<p class="text-sm mt-3">
-© 2026 Ride2Deliver. All Rights Reserved.
-</p>
-
+<p class="text-sm mt-3">© 2026 Ride2Deliver</p>
 </footer>
 
 
-
-<!-- WHATSAPP BUTTON -->
-
 <a href="https://wa.me/918850188435"
-class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600"
-target="_blank">
-
-💬
-
-</a>
-
+class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg"
+target="_blank">💬</a>
 
 
 <script>
 
+let pickupAutocomplete;
+let dropAutocomplete;
+
+function initAutocomplete(){
+
+pickupAutocomplete = new google.maps.places.Autocomplete(
+document.getElementById("pickup")
+);
+
+dropAutocomplete = new google.maps.places.Autocomplete(
+document.getElementById("drop")
+);
+
+pickupAutocomplete.addListener("place_changed",calculateDistance);
+dropAutocomplete.addListener("place_changed",calculateDistance);
+
+}
+
 function calculatePrice(distance){
 
-let price=0
+let price=0;
 
 if(distance<=3) price=70
 else if(distance<=5) price=90
 else if(distance<=8) price=120
 else if(distance<=10) price=140
-else price=140+(distance-10)*10
+else price=140 + (distance-10)*10
 
-return Math.round(price)
-
-}
-
-
-
-function haversineDistance(lat1, lon1, lat2, lon2){
-
-const R=6371
-
-let dLat=(lat2-lat1)*Math.PI/180
-let dLon=(lon2-lon1)*Math.PI/180
-
-let a=
-Math.sin(dLat/2)*Math.sin(dLat/2)+
-Math.cos(lat1*Math.PI/180)*
-Math.cos(lat2*Math.PI/180)*
-Math.sin(dLon/2)*Math.sin(dLon/2)
-
-let c=2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a))
-
-return R*c
+return Math.round(price);
 
 }
 
+function calculateDistance(){
 
+let service = new google.maps.DistanceMatrixService();
 
-async function getCoordinates(place){
+service.getDistanceMatrix({
 
-let url=`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}`
+origins:[document.getElementById("pickup").value],
+destinations:[document.getElementById("drop").value],
+travelMode:"DRIVING"
 
-let response=await fetch(url)
+}, function(response,status){
 
-let data=await response.json()
+if(status!=="OK") return;
 
-if(data.length==0){
-alert("Address not found")
-return null
-}
+let distanceMeters=response.rows[0].elements[0].distance.value;
 
-return{
-lat:parseFloat(data[0].lat),
-lon:parseFloat(data[0].lon)
-}
+let distance=distanceMeters/1000;
 
-}
+let price=calculatePrice(distance);
 
+document.getElementById("distance").innerText=distance.toFixed(1)+" km";
 
+document.getElementById("price").innerText="₹"+price;
 
-async function updatePrice(){
+document.getElementById("distanceField").value=distance.toFixed(1)+" km";
 
-let pickup=document.getElementById("pickup").value
-let drop=document.getElementById("drop").value
+document.getElementById("priceField").value="₹"+price;
 
-if(!pickup||!drop) return
-
-let p1=await getCoordinates(pickup)
-let p2=await getCoordinates(drop)
-
-if(!p1||!p2) return
-
-let distance=haversineDistance(p1.lat,p1.lon,p2.lat,p2.lon)
-
-let price=calculatePrice(distance)
-
-document.getElementById("distance").innerText=distance.toFixed(1)+" km"
-document.getElementById("price").innerText="₹"+price
-
-document.getElementById("distanceField").value=distance.toFixed(1)+" km"
-document.getElementById("priceField").value="₹"+price
+});
 
 }
-
-
 
 function generateOrderId(){
 
-let random=Math.floor(1000+Math.random()*9000)
+let random=Math.floor(1000+Math.random()*9000);
 
-let order="R2D-"+random
-
-document.getElementById("orderId").value=order
+document.getElementById("orderId").value="R2D-"+random;
 
 }
-
-
 
 function disableButton(){
 
-let btn=document.getElementById("submitBtn")
+let btn=document.getElementById("submitBtn");
 
-btn.disabled=true
+btn.disabled=true;
 
-btn.innerText="Booking Sent"
+btn.innerText="Booking Sent";
 
 }
 
-
-
-document.getElementById("pickup").addEventListener("blur",updatePrice)
-document.getElementById("drop").addEventListener("blur",updatePrice)
+window.onload=initAutocomplete;
 
 </script>
-
 
 </body>
 </html>
