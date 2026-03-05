@@ -109,13 +109,20 @@ const API_KEY="eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiO
 
 async function getCoordinates(place){
 
-let url=`https://nominatim.openstreetmap.org/search?format=json&q=${place}`
+let url=`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(place)}`
 
-let response=await fetch(url)
+let response=await fetch(url,{
+headers:{
+"User-Agent":"Ride2Deliver-App"
+}
+})
 
 let data=await response.json()
 
-if(data.length==0) return null
+if(!data || data.length==0){
+alert("Address not found. Please enter a valid address.")
+return null
+}
 
 return{
 lat:data[0].lat,
@@ -158,6 +165,11 @@ let response=await fetch(url)
 
 let data=await response.json()
 
+if(!data.features){
+alert("Route not found")
+return
+}
+
 let distance=data.features[0].properties.summary.distance/1000
 
 let price=calculatePrice(distance)
@@ -171,11 +183,10 @@ document.getElementById("priceField").value="₹"+price
 }
 
 
-document.getElementById("pickup").addEventListener("input",updatePrice)
-document.getElementById("drop").addEventListener("input",updatePrice)
+document.getElementById("pickup").addEventListener("blur",updatePrice)
+document.getElementById("drop").addEventListener("blur",updatePrice)
 
 </script>
-
 </body>
 </html>Secure transport of important documents and paperwork.
 </p>
