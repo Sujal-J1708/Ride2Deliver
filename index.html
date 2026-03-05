@@ -105,7 +105,6 @@ Book Your Delivery
 Enter your pickup and delivery location to instantly calculate the delivery charge and book your Ride2Deliver service.
 </p>
 
-
 <form action="https://formspree.io/f/xkovdwed" method="POST" class="bg-white shadow-lg rounded-xl p-8 space-y-5">
 
 <input type="text" name="Customer Name" placeholder="Your Name"
@@ -114,10 +113,12 @@ class="w-full border p-3 rounded" required>
 <input type="tel" name="Phone" placeholder="Contact Number"
 class="w-full border p-3 rounded" required>
 
-<input id="pickup" name="Pickup Location" placeholder="Pickup Location"
+<input id="pickup" name="Pickup Location"
+placeholder="Pickup Location"
 class="w-full border p-3 rounded" required>
 
-<input id="drop" name="Delivery Location" placeholder="Delivery Location"
+<input id="drop" name="Delivery Location"
+placeholder="Delivery Location"
 class="w-full border p-3 rounded" required>
 
 <input type="hidden" id="distanceField" name="Estimated Distance">
@@ -141,11 +142,8 @@ Final price may vary slightly depending on traffic conditions or route changes.
 
 </div>
 
-<button type="button" onclick="calculateDistance()" class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700">
-Calculate Price
-</button>
-
-<button type="submit" class="w-full bg-black text-white py-3 rounded-md">
+<button type="submit"
+class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700">
 Confirm Booking
 </button>
 
@@ -188,86 +186,73 @@ target="_blank">
 
 <script>
 
+const API_KEY="https://api.openrouteservice.org/v2/directions/driving-car?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0=&start=8.681495,49.41461&end=8.687872,49.420318"
+
 async function getCoordinates(place){
 
-let url=`https://nominatim.openstreetmap.org/search?format=json&q=${place}`;
+let url=`https://nominatim.openstreetmap.org/search?format=json&q=${place}`
 
-let response=await fetch(url);
+let response=await fetch(url)
 
-let data=await response.json();
+let data=await response.json()
 
-if(data.length==0){
-alert("Location not found. Please enter a valid address.");
-return null;
-}
+if(data.length==0) return null
 
 return{
 lat:data[0].lat,
 lon:data[0].lon
-};
+}
 
 }
 
 
 function calculatePrice(distance){
 
-let price=0;
+let price=0
 
-if(distance<=3) price=70;
-else if(distance<=5) price=90;
-else if(distance<=8) price=120;
-else if(distance<=10) price=140;
-else price=140+(distance-10)*10;
+if(distance<=3) price=70
+else if(distance<=5) price=90
+else if(distance<=8) price=120
+else if(distance<=10) price=140
+else price=140+(distance-10)*10
 
-return Math.round(price);
-
-}
-
-
-async function calculateDistance(){
-
-try{
-
-let pickup=document.getElementById("pickup").value;
-let drop=document.getElementById("drop").value;
-
-if(!pickup || !drop){
-alert("Please enter both pickup and delivery location");
-return;
-}
-
-let p1=await getCoordinates(pickup);
-let p2=await getCoordinates(drop);
-
-if(!p1 || !p2) return;
-
-let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=https://api.openrouteservice.org/v2/directions/driving-car?api_key=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImVkZjQ4ZTFiOWJkNDQyZDBiN2QwNWVhYmI4OWY1Mjk1IiwiaCI6Im11cm11cjY0In0=&start=8.681495,49.41461&end=8.687872,49.420318&start=${p1.lon},${p1.lat}&end=${p2.lon},${p2.lat}`;
-
-let res=await fetch(url);
-
-let data=await res.json();
-
-let distance=data.features[0].properties.summary.distance/1000;
-
-let price=calculatePrice(distance);
-
-document.getElementById("distance").innerText=distance.toFixed(1)+" km";
-
-document.getElementById("price").innerText="₹"+price;
-
-document.getElementById("distanceField").value=distance.toFixed(1)+" km";
-
-document.getElementById("priceField").value="₹"+price;
-
-}catch(error){
-
-alert("Unable to calculate distance. Please try again.");
-
-console.log(error);
+return Math.round(price)
 
 }
 
+
+async function updatePrice(){
+
+let pickup=document.getElementById("pickup").value
+let drop=document.getElementById("drop").value
+
+if(!pickup || !drop) return
+
+let p1=await getCoordinates(pickup)
+let p2=await getCoordinates(drop)
+
+if(!p1 || !p2) return
+
+let url=`https://api.openrouteservice.org/v2/directions/driving-car?api_key=${API_KEY}&start=${p1.lon},${p1.lat}&end=${p2.lon},${p2.lat}`
+
+let res=await fetch(url)
+
+let data=await res.json()
+
+let distance=data.features[0].properties.summary.distance/1000
+
+let price=calculatePrice(distance)
+
+document.getElementById("distance").innerText=distance.toFixed(1)+" km"
+document.getElementById("price").innerText="₹"+price
+
+document.getElementById("distanceField").value=distance.toFixed(1)+" km"
+document.getElementById("priceField").value="₹"+price
+
 }
+
+document.getElementById("pickup").addEventListener("change",updatePrice)
+document.getElementById("drop").addEventListener("change",updatePrice)
 
 </script>
 
