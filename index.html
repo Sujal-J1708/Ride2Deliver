@@ -1,194 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ride2Deliver | Navi Mumbai Delivery</title>
+
+<title>Ride2Deliver | Navi Mumbai Delivery Service</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Google Maps -->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA446pj7bBmOscqTvSIBX0Et_PsQ0cvYP8&libraries=places"></script>
 
 </head>
 
+
 <body class="bg-gray-100 text-gray-900">
 
+
 <header class="bg-black text-white">
-<div class="max-w-6xl mx-auto flex justify-between items-center px-6 py-4">
-<h1 class="text-2xl font-bold text-red-500">Ride2Deliver</h1>
-<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">Book Delivery</a>
+
+<div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+
+<div class="flex items-center gap-3">
+
+<img src="assets/logo.png" class="h-10">
+
+<h1 class="text-xl font-semibold">
+Ride2Deliver
+</h1>
+
 </div>
+
+<a href="#booking" class="bg-red-600 px-5 py-2 rounded hover:bg-red-700">
+Book Delivery
+</a>
+
+</div>
+
 </header>
 
 
-<section class="bg-gradient-to-r from-black to-red-900 text-white text-center py-24">
+<section class="bg-gradient-to-r from-black to-red-900 text-white">
+
+<div class="max-w-6xl mx-auto px-4 py-24 text-center">
 
 <h1 class="text-4xl font-bold mb-4">
-Fast & Reliable Delivery Across Navi Mumbai
+Fast Delivery Across Navi Mumbai
 </h1>
 
-<p class="text-xl mb-4">
-Medicines • Documents • Small Parcels
+<p class="text-lg max-w-3xl mx-auto">
+Ride2Deliver is a trusted local delivery service in Navi Mumbai,
+specializing in the safe and timely delivery of medicines,
+important documents, and small parcels.
+We focus on speed, reliability, and customer satisfaction,
+ensuring every delivery reaches its destination securely and on time.
+Whether it’s urgent medical supplies or important paperwork,
+Ride2Deliver is your dependable local delivery partner.
 </p>
 
-<p class="max-w-3xl mx-auto text-gray-300">
-Ride2Deliver provides fast and secure local delivery for medicines, documents and small parcels anywhere across Navi Mumbai.
-</p>
+</div>
 
 </section>
 
 
-<section id="booking" class="max-w-3xl mx-auto px-6 py-20">
+<section id="booking" class="max-w-3xl mx-auto px-4 py-20">
 
-<h2 class="text-3xl font-semibold text-center mb-4">
+<h2 class="text-3xl font-semibold text-center mb-2">
 Book Your Delivery
 </h2>
 
-<form action="https://formspree.io/f/xkovdwed" method="POST"
-class="bg-white shadow-lg rounded-xl p-8 space-y-5">
+<p class="text-center text-gray-600 mb-10">
+Enter your pickup and delivery location to instantly calculate the delivery charge and book your Ride2Deliver service.
+</p>
+
+
+<form action="YOUR_FORMSPREE_LINK" method="POST" class="bg-white shadow-lg rounded-xl p-8 space-y-5">
+
 
 <input type="text" name="Customer Name" placeholder="Your Name"
 class="w-full border p-3 rounded" required>
 
+
 <input type="tel" name="Phone" placeholder="Contact Number"
 class="w-full border p-3 rounded" required>
 
-<input id="pickup" name="Pickup Location"
-placeholder="Pickup Address"
+
+<input id="pickup" name="Pickup Location" type="text"
+placeholder="Pickup Location"
 class="w-full border p-3 rounded" required>
 
-<input id="drop" name="Delivery Location"
-placeholder="Delivery Address"
+
+<input id="drop" name="Delivery Location" type="text"
+placeholder="Delivery Location"
 class="w-full border p-3 rounded" required>
+
 
 <input type="hidden" id="distanceField" name="Estimated Distance">
+
 <input type="hidden" id="priceField" name="Delivery Charge">
-<input type="hidden" id="orderId" name="Order ID">
+
 
 <div class="bg-gray-100 p-4 rounded-lg">
 
 <p class="text-lg">
-Estimated Distance: <span id="distance">0 km</span>
+Estimated Distance:
+<span id="distance">0 km</span>
 </p>
 
 <p class="text-xl font-semibold text-red-600">
-Delivery Charge: <span id="price">₹0</span>
+Delivery Charge:
+<span id="price">₹0</span>
+</p>
+
+<p class="text-sm text-gray-500 mt-2">
+Final price may vary slightly depending on traffic conditions or route changes.
 </p>
 
 </div>
 
-<button id="submitBtn"
-type="submit"
-class="w-full bg-red-600 text-white py-3 rounded hover:bg-red-700"
-onclick="generateOrderId();disableButton()">
+
+<button class="w-full bg-red-600 text-white py-3 rounded-md hover:bg-red-700">
 Confirm Booking
 </button>
+
 
 </form>
 
 </section>
 
 
-<footer class="bg-black text-gray-300 text-center py-10">
+<footer class="bg-black text-gray-300 py-8 text-center">
+
 <p>📞 88501 88435</p>
-<p>📧 ride2deliver@outlook.com</p>
-<p class="text-sm mt-3">© 2026 Ride2Deliver</p>
+
+<p>
+📧 ride2deliver@outlook.com
+</p>
+
+<p class="text-sm mt-2">
+© 2026 Ride2Deliver
+</p>
+
 </footer>
 
 
 <a href="https://wa.me/918850188435"
-class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg"
-target="_blank">💬</a>
+target="_blank"
+class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg">
+
+<svg xmlns="http://www.w3.org/2000/svg"
+width="26"
+height="26"
+fill="white"
+viewBox="0 0 24 24">
+
+<path d="M20.52 3.48A11.8 11.8 0 0012.02 0C5.38 0 .02 5.36.02 12c0 2.11.55 4.18 1.59 6L0 24l6.17-1.6a11.96 11.96 0 005.85 1.5h.01c6.64 0 12-5.36 12-12 0-3.2-1.25-6.21-3.51-8.42z"/>
+
+</svg>
+
+</a>
+
 
 
 <script>
 
-let pickupAutocomplete;
-let dropAutocomplete;
+let pickupInput = document.getElementById("pickup");
+let dropInput = document.getElementById("drop");
 
-function initAutocomplete(){
+let pickupAutocomplete = new google.maps.places.Autocomplete(pickupInput);
+let dropAutocomplete = new google.maps.places.Autocomplete(dropInput);
 
-pickupAutocomplete = new google.maps.places.Autocomplete(
-document.getElementById("pickup")
-);
+let service = new google.maps.DistanceMatrixService();
 
-dropAutocomplete = new google.maps.places.Autocomplete(
-document.getElementById("drop")
-);
 
-pickupAutocomplete.addListener("place_changed",calculateDistance);
-dropAutocomplete.addListener("place_changed",calculateDistance);
-
-}
-
-function calculatePrice(distance){
+function calculatePrice(distanceKm){
 
 let price=0;
 
-if(distance<=3) price=70
-else if(distance<=5) price=90
-else if(distance<=8) price=120
-else if(distance<=10) price=140
-else price=140 + (distance-10)*10
+if(distanceKm<=3){
+price=70;
+}
+else if(distanceKm<=5){
+price=90;
+}
+else if(distanceKm<=8){
+price=120;
+}
+else if(distanceKm<=10){
+price=140;
+}
+else{
+price=140+(distanceKm-10)*10;
+}
 
 return Math.round(price);
 
 }
 
+
 function calculateDistance(){
 
-let service = new google.maps.DistanceMatrixService();
+let origin = pickupInput.value;
+let destination = dropInput.value;
+
+if(origin && destination){
 
 service.getDistanceMatrix({
 
-origins:[document.getElementById("pickup").value],
-destinations:[document.getElementById("drop").value],
+origins:[origin],
+destinations:[destination],
 travelMode:"DRIVING"
 
-}, function(response,status){
+},
 
-if(status!=="OK") return;
+function(response,status){
 
-let distanceMeters=response.rows[0].elements[0].distance.value;
+if(status==="OK"){
 
-let distance=distanceMeters/1000;
+let distanceMeters =
+response.rows[0].elements[0].distance.value;
 
-let price=calculatePrice(distance);
+let distanceKm = distanceMeters/1000;
 
-document.getElementById("distance").innerText=distance.toFixed(1)+" km";
+let price = calculatePrice(distanceKm);
 
-document.getElementById("price").innerText="₹"+price;
+document.getElementById("distance").innerText =
+distanceKm.toFixed(1)+" km";
 
-document.getElementById("distanceField").value=distance.toFixed(1)+" km";
+document.getElementById("price").innerText =
+"₹"+price;
 
-document.getElementById("priceField").value="₹"+price;
+document.getElementById("distanceField").value =
+distanceKm.toFixed(1)+" km";
+
+document.getElementById("priceField").value =
+"₹"+price;
+
+}
 
 });
 
 }
 
-function generateOrderId(){
-
-let random=Math.floor(1000+Math.random()*9000);
-
-document.getElementById("orderId").value="R2D-"+random;
-
 }
 
-function disableButton(){
-
-let btn=document.getElementById("submitBtn");
-
-btn.disabled=true;
-
-btn.innerText="Booking Sent";
-
-}
-
-window.onload=initAutocomplete;
+pickupInput.addEventListener("change",calculateDistance);
+dropInput.addEventListener("change",calculateDistance);
 
 </script>
+
 
 </body>
 </html>
